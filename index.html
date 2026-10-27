@@ -1,0 +1,448 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Зимние шины 215/65 R17</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #eef2f7;
+  --surface: #ffffff;
+  --surface-2: #f6f9fc;
+  --border: #dde4ef;
+  --text: #111827;
+  --text-2: #4b5563;
+  --text-3: #9ca3af;
+  --accent: #1d4ed8;
+  --accent-bg: #eff6ff;
+  --accent-hover: #1e40af;
+  --green: #15803d;
+  --green-bg: #f0fdf4;
+  --yellow: #92400e;
+  --yellow-bg: #fffbeb;
+  --red: #991b1b;
+  --red-bg: #fef2f2;
+  --blue-1: #1d4ed8;
+  --blue-2: #0369a1;
+  --blue-3: #0891b2;
+  --teal: #0f766e;
+  --purple: #6d28d9;
+  --orange: #b45309;
+  --r: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.13);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1120;
+    --surface: #131f35;
+    --surface-2: #0f1929;
+    --border: #1e2d47;
+    --text: #f1f5f9;
+    --text-2: #94a3b8;
+    --text-3: #475569;
+    --accent: #60a5fa;
+    --accent-bg: #1e3358;
+    --accent-hover: #93c5fd;
+    --green: #4ade80;
+    --green-bg: #052e16;
+    --yellow: #fbbf24;
+    --yellow-bg: #1c1007;
+    --red: #f87171;
+    --red-bg: #1c0505;
+    --blue-1: #60a5fa;
+    --blue-2: #38bdf8;
+    --blue-3: #22d3ee;
+    --teal: #2dd4bf;
+    --purple: #a78bfa;
+    --orange: #fb923c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1120;
+  --surface: #131f35;
+  --surface-2: #0f1929;
+  --border: #1e2d47;
+  --text: #f1f5f9;
+  --text-2: #94a3b8;
+  --text-3: #475569;
+  --accent: #60a5fa;
+  --accent-bg: #1e3358;
+  --accent-hover: #93c5fd;
+  --green: #4ade80;
+  --green-bg: #052e16;
+  --yellow: #fbbf24;
+  --yellow-bg: #1c1007;
+  --red: #f87171;
+  --red-bg: #1c0505;
+  --blue-1: #60a5fa;
+  --blue-2: #38bdf8;
+  --blue-3: #22d3ee;
+  --teal: #2dd4bf;
+  --purple: #a78bfa;
+  --orange: #fb923c;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 32px;
+}
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 20px max(16px, env(safe-area-inset-left, 0px)) 16px;
+  margin-left: max(-16px, calc(-1 * env(safe-area-inset-left, 0px)));
+  margin-right: max(-16px, calc(-1 * env(safe-area-inset-right, 0px)));
+}
+.header-inner { max-width: 1200px; margin: 0 auto; }
+.header-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.page-title { font-size: 20px; font-weight: 700; color: var(--text); margin: 0 0 4px; }
+.page-subtitle { font-size: 13px; color: var(--text-2); margin: 0; }
+.car-badge {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--accent-bg); color: var(--accent);
+  border-radius: 20px; padding: 3px 10px; font-size: 12px; font-weight: 500;
+  white-space: nowrap;
+}
+.badge.green { background: var(--green-bg); color: var(--green); }
+.badge.yellow { background: var(--yellow-bg); color: var(--yellow); }
+.badge.red { background: var(--red-bg); color: var(--red); }
+.main { max-width: 1200px; margin: 0 auto; padding-top: 24px; }
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.kpi {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
+  padding: 16px; box-shadow: var(--shadow);
+}
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--text-3); margin-bottom: 6px; }
+.kpi-value { font-size: 26px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; line-height: 1; }
+.kpi-sub { font-size: 12px; color: var(--text-2); margin-top: 4px; }
+.filters {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px; box-shadow: var(--shadow);
+  display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.filter-label { font-size: 12px; font-weight: 600; color: var(--text-2); white-space: nowrap; }
+.filter-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.chip {
+  cursor: pointer; border: 1px solid var(--border); border-radius: 20px;
+  padding: 4px 12px; font-size: 12px; font-weight: 500; background: var(--surface-2); color: var(--text-2);
+  transition: all .15s; white-space: nowrap; user-select: none;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.active { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
+.filter-sep { width: 1px; height: 20px; background: var(--border); }
+.range-wrap { display: flex; align-items: center; gap: 8px; }
+input[type=range] {
+  accent-color: var(--accent); cursor: pointer; width: 120px;
+}
+.range-val { font-size: 12px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sort-wrap { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+select {
+  background: var(--surface-2); border: 1px solid var(--border); color: var(--text);
+  border-radius: 6px; padding: 5px 8px; font-size: 12px; font-family: inherit; cursor: pointer;
+}
+.grid-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+@media (max-width: 780px) { .grid-charts { grid-template-columns: 1fr; } }
+.chart-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
+  padding: 16px; box-shadow: var(--shadow);
+}
+.chart-title { font-size: 13px; font-weight: 600; color: var(--text); margin: 0 0 14px; }
+.chart-wrap { position: relative; height: 240px; }
+.table-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
+  box-shadow: var(--shadow); overflow: hidden; margin-bottom: 20px;
+}
+.table-header { padding: 14px 16px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.table-title { font-size: 13px; font-weight: 600; color: var(--text); margin: 0; }
+.count-badge { font-size: 11px; font-weight: 600; background: var(--accent-bg); color: var(--accent); border-radius: 10px; padding: 2px 8px; }
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th {
+  padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--text-3);
+  background: var(--surface-2); border-bottom: 1px solid var(--border);
+  white-space: nowrap; position: sticky; top: 0; z-index: 1;
+  cursor: pointer; user-select: none;
+}
+thead th:hover { color: var(--accent); }
+thead th .sort-ico { opacity: .4; margin-left: 4px; }
+thead th.sorted .sort-ico { opacity: 1; color: var(--accent); }
+tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--surface-2); }
+tbody tr.unsuitable { opacity: .55; }
+td { padding: 11px 12px; vertical-align: middle; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+.brand-cell { display: flex; align-items: center; gap: 8px; }
+.brand-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.model-name { font-size: 11px; font-weight: 400; color: var(--text-2); margin-top: 1px; }
+.score-bar-wrap { display: flex; align-items: center; gap: 7px; min-width: 80px; }
+.score-bar { flex: 1; height: 5px; border-radius: 3px; background: var(--border); overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 3px; }
+.score-num { font-size: 12px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.price-cell { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.price-sub { font-size: 11px; color: var(--text-2); font-weight: 400; }
+.avail-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+.avail-good { background: var(--green); }
+.avail-limited { background: var(--yellow); }
+.avail-poor { background: var(--red); }
+.suitability-tag {
+  font-size: 11px; font-weight: 600; border-radius: 4px; padding: 2px 7px; white-space: nowrap;
+}
+.suit-yes { background: var(--green-bg); color: var(--green); }
+.suit-no { background: var(--red-bg); color: var(--red); }
+.detail-row td { background: var(--surface-2); padding: 12px 16px 14px; }
+.detail-grid { display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; }
+.detail-section h4 { margin: 0 0 6px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--text-3); }
+.pros li::before { content: '＋'; color: var(--green); margin-right: 4px; }
+.cons li::before { content: '−'; color: var(--red); margin-right: 4px; }
+.pros, .cons { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; }
+.radar-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
+  padding: 16px; box-shadow: var(--shadow); margin-bottom: 20px;
+}
+.radar-title { font-size: 13px; font-weight: 600; color: var(--text); margin: 0 0 14px; }
+.radar-wrap { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+.radar-chart-wrap { position: relative; width: 280px; height: 280px; flex-shrink: 0; }
+.radar-legend { display: flex; flex-direction: column; gap: 10px; padding-top: 8px; flex: 1; min-width: 180px; }
+.radar-legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.radar-legend-color { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+.context-card {
+  background: linear-gradient(135deg, var(--accent-bg) 0%, var(--surface) 100%);
+  border: 1px solid var(--border); border-radius: var(--r);
+  padding: 16px; margin-bottom: 20px; box-shadow: var(--shadow);
+}
+.context-title { font-size: 13px; font-weight: 600; color: var(--accent); margin: 0 0 10px; }
+.context-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.context-item { display: flex; flex-direction: column; gap: 3px; }
+.context-item-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--text-3); }
+.context-item-val { font-size: 13px; font-weight: 500; color: var(--text); }
+.weight-note { font-size: 11px; color: var(--text-2); margin-top: 8px; font-style: italic; }
+.expand-btn {
+  cursor: pointer; background: none; border: none; color: var(--accent); font-size: 12px;
+  font-family: inherit; padding: 0; display: flex; align-items: center; gap: 4px;
+}
+.expand-btn:hover { color: var(--accent-hover); }
+@media (max-width: 640px) {
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .filters { flex-direction: column; align-items: flex-start; }
+  .sort-wrap { margin-left: 0; }
+  .radar-chart-wrap { width: 100%; max-width: 280px; }
+}
+</style>
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <h1 class="page-title">Зимние шины 215/65 R17 — сезон 25/26</h1>
+        <p class="page-subtitle">Нешипованные (фрикционные) · VW Tiguan II Highline 2.0 TSI 180 л.с. · Гатчина / Санкт-Петербург · Производство: РФ и Китай</p>
+      </div>
+      <div class="car-badge">
+        <span class="badge">R17 7Jx17 5×112 ET40</span>
+        <span class="badge green">DSG-7 · 4Motion</span>
+        <span class="badge">XW8ZZZ5NZKG237479</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main">
+  <div class="context-card">
+    <div class="context-title">Условия эксплуатации</div>
+    <div class="context-grid">
+      <div class="context-item"><span class="context-item-label">Регион</span><span class="context-item-val">Ленинградская обл. · СПб, Гатчина</span></div>
+      <div class="context-item"><span class="context-item-label">Дорожное покрытие</span><span class="context-item-val">Асфальт, городские дороги, трасса</span></div>
+      <div class="context-item"><span class="context-item-label">Зима</span><span class="context-item-val">Мягкая, влажный снег, лёд, дождь</span></div>
+      <div class="context-item"><span class="context-item-label">Бездорожье</span><span class="context-item-val">Не требуется</span></div>
+      <div class="context-item"><span class="context-item-label">Приоритет шины</span><span class="context-item-val">Мокрый снег · лёд · сухой асфальт</span></div>
+      <div class="context-item"><span class="context-item-label">Ключевое</span><span class="context-item-val">Управляемость, тихость, ресурс</span></div>
+    </div>
+    <p class="weight-note">Рейтинг рассчитан с учётом условий: приоритет тяги на снегу/льду, управляемости на мокром асфальте, шумности и стоимости.</p>
+  </div>
+
+  <div class="kpi-row" id="kpi-row"></div>
+
+  <div class="filters">
+    <span class="filter-label">Бренд:</span>
+    <div class="filter-group" id="brand-filters"></div>
+    <div class="filter-sep"></div>
+    <span class="filter-label">Ценовой диапазон:</span>
+    <div class="range-wrap">
+      <span style="font-size:12px;color:var(--text-2)">до</span>
+      <input type="range" id="price-range" min="3000" max="12000" step="500" value="12000">
+      <span class="range-val" id="price-val">12 000 ₽</span>
+    </div>
+    <div class="filter-sep"></div>
+    <div class="sort-wrap">
+      <span class="filter-label">Сортировка:</span>
+      <select id="sort-select">
+        <option value="score">По рейтингу</option>
+        <option value="price_asc">Цена ↑</option>
+        <option value="price_desc">Цена ↓</option>
+        <option value="noise">Тишина</option>
+        <option value="wet">Мокрый снег</option>
+        <option value="ice">Лёд</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid-charts">
+    <div class="chart-card">
+      <h3 class="chart-title">Цена vs Рейтинг</h3>
+      <div class="chart-wrap"><canvas id="scatter-chart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3 class="chart-title">Средний балл по производителям</h3>
+      <div class="chart-wrap"><canvas id="brand-chart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="radar-card">
+    <h3 class="radar-title">Сравнение топ-5 шин по характеристикам</h3>
+    <div class="radar-wrap">
+      <div class="radar-chart-wrap"><canvas id="radar-chart"></canvas></div>
+      <div class="radar-legend" id="radar-legend"></div>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-header">
+      <h3 class="table-title">Все модели 215/65 R17</h3>
+      <span class="count-badge" id="count-badge">0 моделей</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr id="tbl-head"></tr>
+        </thead>
+        <tbody id="tbl-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+const TYRES=[
+  {id:1,brand:'Michelin',model:'Alpin 7 103T XL',origin:'Россия (Давыдово, МО)',price:9500,price_set:38000,scores:{ice:8.5,snow:8.6,wet:9.0,dry:9.1,noise:8.8,wear:8.5},avail:'limited',eu_label:{roll:'C',wet:'A',noise:'71'},pros:['Отличные показатели на мокром и сухом','Тихая и комфортная','Европейский характер управляемости'],cons:['Сложнее найти в продаже','Слабее на чистом льду'],spb_avail:true},
+  {id:2,brand:'Pirelli',model:'Ice Zero Friction 103T XL',origin:'Россия (Киров)',price:9200,price_set:36800,scores:{ice:9.1,snow:8.8,wet:8.5,dry:8.6,noise:8.3,wear:8.0},avail:'good',eu_label:{roll:'C',wet:'B',noise:'70'},pros:['Отличное сцепление на льду','Производится в России','Широкий выбор в СПб'],cons:['Чуть хуже на мокром асфальте','Средний ресурс'],spb_avail:true},
+  {id:3,brand:'Cordiant',model:'Winter Drive 2 SUV 103T XL',origin:'Россия (Ярославль)',price:5200,price_set:20800,scores:{ice:7.9,snow:8.1,wet:7.9,dry:7.8,noise:7.8,wear:8.2},avail:'good',eu_label:{roll:'D',wet:'C',noise:'72'},pros:['Самая доступная цена','Российское производство','Хороший ресурс'],cons:['Уступает лидерам по льду и мокрому','Шумнее конкурентов'],spb_avail:true},
+  {id:4,brand:'Ikon',model:'Snow 5 SUV (экс-Nokian R5 SUV)',origin:'Россия (Всеволожск)',price:8200,price_set:32800,scores:{ice:9.3,snow:9.2,wet:8.5,dry:8.2,noise:8.7,wear:8.0},avail:'good',eu_label:{roll:'C',wet:'B',noise:'68'},pros:['Разработка Nokian, производство в России','Лучшее сцепление на снегу и льду','Очень тихая'],cons:['Чуть хуже на сухом','Средний ресурс'],spb_avail:true},
+  {id:5,brand:'Kumho',model:'WinterCraft WS71 104T XL',origin:'Китай',price:6200,price_set:24800,scores:{ice:7.8,snow:7.9,wet:8.0,dry:7.8,noise:7.9,wear:7.8},avail:'limited',eu_label:{roll:'D',wet:'C',noise:'73'},pros:['Доступная цена','Усиленный XL — подходит для нагрузки Tiguan'],cons:['Уступает по льду и снегу','Ограниченное наличие'],spb_avail:true},
+];
+const WEIGHTS={ice:0.22,snow:0.22,wet:0.20,dry:0.14,noise:0.12,wear:0.10};
+const BRAND_COLORS={'Michelin':'#1d4ed8','Pirelli':'#be123c','Cordiant':'#15803d','Ikon':'#0f766e','Kumho':'#d97706'};
+function calcScore(t){return +Object.entries(WEIGHTS).reduce((s,[k,w])=>s+t.scores[k]*w,0).toFixed(2);}
+TYRES.forEach(t=>{t.score=calcScore(t);});
+let activeBrands=new Set(TYRES.map(t=>t.brand));
+let maxPrice=12000;
+let sortBy='score';
+let expandedRow=null;
+function filtered(){return TYRES.filter(t=>activeBrands.has(t.brand)&&t.price<=maxPrice);}
+function sorted(arr){return[...arr].sort((a,b)=>{
+  if(sortBy==='price_asc')return a.price-b.price;
+  if(sortBy==='price_desc')return b.price-a.price;
+  if(sortBy==='noise')return b.scores.noise-a.scores.noise;
+  if(sortBy==='wet')return b.scores.wet-a.scores.wet;
+  if(sortBy==='ice')return b.scores.ice-a.scores.ice;
+  return b.score-a.score;
+});}
+function fmt(n){return n.toLocaleString('ru-RU');}
+function scoreColor(v){if(v>=9)return'#15803d';if(v>=8.5)return'#0369a1';if(v>=8)return'#92400e';return'#991b1b';}
+function renderKPI(){
+  const arr=filtered();
+  const best=[...arr].sort((a,b)=>b.score-a.score)[0];
+  const cheapest=[...arr].sort((a,b)=>a.price-b.price)[0];
+  const avgP=arr.length?Math.round(arr.reduce((s,t)=>s+t.price,0)/arr.length):0;
+  document.getElementById('kpi-row').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Моделей найдено</div><div class="kpi-value">${arr.length}</div><div class="kpi-sub">из ${TYRES.length} в базе</div></div>
+    <div class="kpi"><div class="kpi-label">Лучший рейтинг</div><div class="kpi-value" style="color:var(--green)">${best?best.score.toFixed(1):'-'}</div><div class="kpi-sub">${best?best.brand:''}</div></div>
+    <div class="kpi"><div class="kpi-label">Средняя цена</div><div class="kpi-value">${avgP?fmt(avgP):'-'}</div><div class="kpi-sub">за шину, ₽</div></div>
+    <div class="kpi"><div class="kpi-label">Дешевле всего</div><div class="kpi-value">${cheapest?fmt(cheapest.price):'-'}</div><div class="kpi-sub">${cheapest?cheapest.brand:''}</div></div>
+    <div class="kpi"><div class="kpi-label">Есть в СПб</div><div class="kpi-value" style="color:var(--green)">${arr.filter(t=>t.spb_avail).length}</div><div class="kpi-sub">моделей</div></div>
+  `;
+}
+function renderBrandFilters(){
+  const brands=[...new Set(TYRES.map(t=>t.brand))];
+  document.getElementById('brand-filters').innerHTML=brands.map(b=>{
+    const on=activeBrands.has(b);const c=BRAND_COLORS[b];
+    return`<span class="chip${on?' active':''}" data-brand="${b}" style="${on?'border-color:'+c+';color:'+c+';background:'+c+'18':''}">${b}</span>`;
+  }).join('');
+  document.querySelectorAll('.chip[data-brand]').forEach(el=>{
+    el.addEventListener('click',()=>{const b=el.dataset.brand;if(activeBrands.has(b)){if(activeBrands.size>1)activeBrands.delete(b);}else activeBrands.add(b);renderAll();});
+  });
+}
+let scatterChart,brandChart,radarChart;
+function bar(v){return`<div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:${Math.max(0,(v-7)/3*100)}%;background:${scoreColor(v)}"></div></div><span class="score-num" style="color:${scoreColor(v)}">${v.toFixed(1)}</span></div>`;}
+function renderTable(){
+  const arr=sorted(filtered());
+  document.getElementById('count-badge').textContent=arr.length+' моделей';
+  const cols=[{k:'brand',l:'Производитель / Модель'},{k:'score',l:'Рейтинг',s:'score'},{k:'ice',l:'Лёд',s:'ice'},{k:'snow',l:'Снег',s:'snow'},{k:'wet',l:'Мокрый',s:'wet'},{k:'noise',l:'Тихость',s:'noise'},{k:'price',l:'Цена',s:'price_asc'},{k:'avail',l:'Наличие'},{k:'spb',l:'СПб'},{k:'det',l:''}];
+  document.getElementById('tbl-head').innerHTML=cols.map(c=>`<th class="${c.s&&sortBy===c.s?'sorted':''}" data-sort="${c.s||''}">${c.l}${c.s?`<span class="sort-ico">${sortBy===c.s?'▲':'↕'}</span>`:''}</th>`).join('');
+  document.querySelectorAll('thead th[data-sort]').forEach(th=>{if(th.dataset.sort)th.addEventListener('click',()=>{sortBy=th.dataset.sort;renderAll();});});
+  const tbody=document.getElementById('tbl-body');
+  tbody.innerHTML='';
+  arr.forEach(t=>{
+    const tr=document.createElement('tr');tr.dataset.id=t.id;
+    const av=t.avail==='good'?'<span class="avail-dot avail-good"></span>Широко':t.avail==='limited'?'<span class="avail-dot avail-limited"></span>Ограничено':'<span class="avail-dot avail-poor"></span>Мало';
+    tr.innerHTML=`
+      <td><div class="brand-cell"><div class="brand-dot" style="background:${BRAND_COLORS[t.brand]}"></div><div><div>${t.brand}</div><div class="model-name">${t.model}</div></div></div></td>
+      <td>${bar(t.score)}</td><td>${bar(t.scores.ice)}</td><td>${bar(t.scores.snow)}</td><td>${bar(t.scores.wet)}</td><td>${bar(t.scores.noise)}</td>
+      <td class="price-cell">${fmt(t.price)} ₽<div class="price-sub">${fmt(t.price_set)} ₽ / 4 шт.</div></td>
+      <td style="font-size:12px;color:var(--text-2)">${av}</td>
+      <td><span class="suitability-tag ${t.spb_avail?'suit-yes':'suit-no'}">${t.spb_avail?'Есть':'Уточнить'}</span></td>
+      <td><button class="expand-btn" data-id="${t.id}">▶</button></td>`;
+    tbody.appendChild(tr);
+    tr.querySelector('.expand-btn').addEventListener('click',()=>{
+      const ex=tbody.querySelector('.detail-row');
+      if(ex){ex.remove();if(expandedRow===t.id){expandedRow=null;return;}}
+      expandedRow=t.id;
+      const dr=document.createElement('tr');dr.className='detail-row';
+      dr.innerHTML=`<td colspan="10"><div class="detail-grid">
+        <div class="detail-section"><h4>Плюсы</h4><ul class="pros">${t.pros.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+        <div class="detail-section"><h4>Минусы</h4><ul class="cons">${t.cons.map(c=>`<li>${c}</li>`).join('')}</ul></div>
+        <div class="detail-section"><h4>EU Label</h4><div style="font-size:12px;color:var(--text-2)">Топливо: <b>${t.eu_label.roll}</b> · Мокрое: <b>${t.eu_label.wet}</b> · Шум: <b>${t.eu_label.noise} дБ</b></div></div>
+        <div class="detail-section"><h4>Страна</h4><div style="font-size:12px;color:var(--text-2)">${t.origin}</div></div>
+      </div></td>`;
+      tr.after(dr);
+    });
+  });
+}
+function renderScatter(){
+  const arr=filtered();
+  const ctx=document.getElementById('scatter-chart').getContext('2d');
+  if(scatterChart)scatterChart.destroy();
+  const datasets=[...new Set(arr.map(t=>t.brand))].map(b=>({label:b,data:arr.filter(t=>t.brand===b).map(t=>({x:t.price,y:t.score,label:t.model.split(' ').slice(0,2).join(' ')})),backgroundColor:BRAND_COLORS[b]+'cc',borderColor:BRAND_COLORS[b],pointRadius:7,pointHoverRadius:9}));
+  scatterChart=new Chart(ctx,{type:'scatter',data:{datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:d=>`${d.dataset.label}: ${fmt(d.raw.x)} ₽ · ★${d.raw.y.toFixed(1)}`}}},scales:{x:{title:{display:true,text:'Цена, ₽',color:'var(--text-2)',font:{size:11}},ticks:{color:'var(--text-2)',font:{size:10},callback:v=>fmt(v)},grid:{color:'var(--border)'}},y:{title:{display:true,text:'Рейтинг',color:'var(--text-2)',font:{size:11}},min:7.5,max:9.6,ticks:{color:'var(--text-2)',font:{size:10}},grid:{color:'var(--border)'}}}}});
+}
+function renderBrandChart(){
+  const arr=filtered();
+  const brands=[...new Set(arr.map(t=>t.brand))];
+  const data=brands.map(b=>{const tt=arr.filter(t=>t.brand===b);return{b,s:+(tt.reduce((s,t)=>s+t.score,0)/tt.length).toFixed(2)};}).sort((a,c)=>c.s-a.s);
+  const ctx=document.getElementById('brand-chart').getContext('2d');
+  if(brandChart)brandChart.destroy();
+  brandChart=new Chart(ctx,{type:'bar',data:{labels:data.map(x=>x.b),datasets:[{label:'Рейтинг',data:data.map(x=>x.s),backgroundColor:data.map(x=>BRAND_COLORS[x.b]+'cc'),borderColor:data.map(x=>BRAND_COLORS[x.b]),borderWidth:1,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:d=>`★ ${d.raw.toFixed(2)}`}}},scales:{x:{min:7.5,max:9.6,ticks:{color:'var(--text-2)',font:{size:10}},grid:{color:'var(--border)'}},y:{ticks:{color:'var(--text-2)',font:{size:10}},grid:{display:false}}}}});
+}
+function renderRadar(){
+  const top5=sorted(filtered()).slice(0,5);
+  const ctx=document.getElementById('radar-chart').getContext('2d');
+  if(radarChart)radarChart.destroy();
+  radarChart=new Chart(ctx,{type:'radar',data:{labels:['Лёд','Снег','Мокрый','Сухой','Тихость','Ресурс'],datasets:top5.map(t=>({label:t.brand,data:['ice','snow','wet','dry','noise','wear'].map(k=>t.scores[k]),backgroundColor:BRAND_COLORS[t.brand]+'22',borderColor:BRAND_COLORS[t.brand],borderWidth:2,pointRadius:3}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:d=>`${d.dataset.label}: ${d.raw.toFixed(1)}`}}},scales:{r:{min:7,max:10,ticks:{display:false},grid:{color:'var(--border)'},angleLines:{color:'var(--border)'},pointLabels:{color:'var(--text-2)',font:{size:11}}}}}});
+  document.getElementById('radar-legend').innerHTML=top5.map(t=>`<div class="radar-legend-item"><div class="radar-legend-color" style="background:${BRAND_COLORS[t.brand]}"></div><div><b>${t.brand}</b> ${t.model.split(' ').slice(0,2).join(' ')} — ★${t.score.toFixed(1)}</div></div>`).join('');
+}
+function renderAll(){renderKPI();renderBrandFilters();renderTable();renderScatter();renderBrandChart();renderRadar();}
+document.getElementById('price-range').addEventListener('input',function(){maxPrice=+this.value;document.getElementById('price-val').textContent=fmt(maxPrice)+' ₽';renderAll();});
+document.getElementById('sort-select').addEventListener('change',function(){sortBy=this.value;renderAll();});
+renderAll();
+</script>
