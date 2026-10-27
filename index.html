@@ -249,7 +249,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
     <div class="header-top">
       <div>
         <h1 class="page-title">Зимние шины 215/65 R17 — сезон 25/26</h1>
-        <p class="page-subtitle">Нешипованные (фрикционные) · VW Tiguan II Highline 2.0 TSI 180 л.с. · Гатчина / Санкт-Петербург · Производство: РФ и Китай</p>
+        <p class="page-subtitle">Нешипованные (фрикционные) · VW Tiguan II Highline 2.0 TSI 180 л.с. · Гатчина / Санкт-Петербург · Цены: mosautoshina.ru + kolesa-darom.ru, октябрь 2026</p>
       </div>
       <div class="car-badge">
         <span class="badge">R17 7Jx17 5×112 ET40</span>
@@ -282,8 +282,8 @@ td:first-child { font-weight: 600; white-space: nowrap; }
     <span class="filter-label">Ценовой диапазон:</span>
     <div class="range-wrap">
       <span style="font-size:12px;color:var(--text-2)">до</span>
-      <input type="range" id="price-range" min="3000" max="12000" step="500" value="12000">
-      <span class="range-val" id="price-val">12 000 ₽</span>
+      <input type="range" id="price-range" min="3000" max="27000" step="500" value="27000">
+      <span class="range-val" id="price-val">27 000 ₽</span>
     </div>
     <div class="filter-sep"></div>
     <div class="sort-wrap">
@@ -334,19 +334,29 @@ td:first-child { font-weight: 600; white-space: nowrap; }
   </div>
 </div>
 <script>
+// Цены: min(mosautoshina.ru, kolesa-darom.ru, pokrishka.ru), октябрь 2026. Баллы — оценочные по EU-меткам, НЕ результаты независимых тестов.
 const TYRES=[
-  {id:1,brand:'Michelin',model:'Alpin 7 103T XL',origin:'Россия (Давыдово, МО)',price:9500,price_set:38000,scores:{ice:8.5,snow:8.6,wet:9.0,dry:9.1,noise:8.8,wear:8.5},avail:'limited',eu_label:{roll:'C',wet:'A',noise:'71'},pros:['Отличные показатели на мокром и сухом','Тихая и комфортная','Европейский характер управляемости'],cons:['Сложнее найти в продаже','Слабее на чистом льду'],spb_avail:true},
-  {id:2,brand:'Pirelli',model:'Ice Zero Friction 103T XL',origin:'Россия (Киров)',price:9200,price_set:36800,scores:{ice:9.1,snow:8.8,wet:8.5,dry:8.6,noise:8.3,wear:8.0},avail:'good',eu_label:{roll:'C',wet:'B',noise:'70'},pros:['Отличное сцепление на льду','Производится в России','Широкий выбор в СПб'],cons:['Чуть хуже на мокром асфальте','Средний ресурс'],spb_avail:true},
-  {id:3,brand:'Cordiant',model:'Winter Drive 2 SUV 103T XL',origin:'Россия (Ярославль)',price:5200,price_set:20800,scores:{ice:7.9,snow:8.1,wet:7.9,dry:7.8,noise:7.8,wear:8.2},avail:'good',eu_label:{roll:'D',wet:'C',noise:'72'},pros:['Самая доступная цена','Российское производство','Хороший ресурс'],cons:['Уступает лидерам по льду и мокрому','Шумнее конкурентов'],spb_avail:true},
-  {id:4,brand:'Ikon',model:'Snow 5 SUV (экс-Nokian R5 SUV)',origin:'Россия (Всеволожск)',price:8200,price_set:32800,scores:{ice:9.3,snow:9.2,wet:8.5,dry:8.2,noise:8.7,wear:8.0},avail:'good',eu_label:{roll:'C',wet:'B',noise:'68'},pros:['Разработка Nokian, производство в России','Лучшее сцепление на снегу и льду','Очень тихая'],cons:['Чуть хуже на сухом','Средний ресурс'],spb_avail:true},
-  {id:5,brand:'Kumho',model:'WinterCraft WS71 104T XL',origin:'Китай',price:6200,price_set:24800,scores:{ice:7.8,snow:7.9,wet:8.0,dry:7.8,noise:7.9,wear:7.8},avail:'limited',eu_label:{roll:'D',wet:'C',noise:'73'},pros:['Доступная цена','Усиленный XL — подходит для нагрузки Tiguan'],cons:['Уступает по льду и снегу','Ограниченное наличие'],spb_avail:true},
+  {id:1,brand:'Cordiant',model:'Winter Drive 2 SUV 103T XL',origin:'Россия',price:9340,price_set:37360,user_rating:4.7,reviews:1278,tag:'',scores:{ice:7.6,snow:7.8,wet:6.8,dry:7.5,noise:8.2,wear:8.2},avail:'good',eu_label:{roll:'C',wet:'D',noise:'71'},pros:['Самая доступная цена','Широкое наличие, самовывоз 2 ноября'],cons:['EU wet D — слабее на мокром','Шумновата (71 дБ)'],spb_avail:true},
+  {id:2,brand:'Kumho',model:'WS51 103T',origin:'Южная Корея',price:8951,price_set:35804,user_rating:4.8,reviews:102,tag:'',scores:{ice:7.8,snow:8.0,wet:7.8,dry:7.8,noise:8.0,wear:8.0},avail:'good',eu_label:{roll:'—',wet:'—',noise:'—'},pros:['Доступная цена','Хорошая управляемость'],cons:['Нет EU-метки','Меньше отзывов чем WS71'],spb_avail:true},
+  {id:3,brand:'Gislaved',model:'ArcticControl 103T XL',origin:'Россия',price:10440,price_set:41760,user_rating:4.7,reviews:83,tag:'Новинка',scores:{ice:8.4,snow:8.5,wet:8.0,dry:8.0,noise:8.2,wear:8.0},avail:'limited',eu_label:{roll:'—',wet:'—',noise:'—'},pros:['Скандинавская разработка (Continental Group)'],cons:['Нет EU-метки — новинка','Мало отзывов (83)'],spb_avail:true},
+  {id:4,brand:'Hankook',model:'Winter i*cept evo 4 SUV W340A 103V',origin:'Корея',price:10880,price_set:43520,user_rating:0,reviews:0,tag:'',scores:{ice:8.6,snow:8.7,wet:8.8,dry:8.8,noise:8.3,wear:8.3},avail:'limited',eu_label:{roll:'—',wet:'—',noise:'—'},pros:['Новейшая модель i*cept evo 4','Ожидаемо высокие показатели'],cons:['Нет отзывов — очень свежая модель','Нет EU-метки'],spb_avail:true},
+  {id:5,brand:'Nokian',model:'WR SUV 4 103H XL',origin:'Россия',price:10950,price_set:43800,user_rating:4.6,reviews:19,tag:'',scores:{ice:8.5,snow:8.6,wet:8.0,dry:8.3,noise:7.8,wear:8.5},avail:'good',eu_label:{roll:'C',wet:'C',noise:'72'},pros:['Финская разработка, завод в России','Долгий ресурс'],cons:['EU wet C — средний показатель','Шумновата (72 дБ)','Мало отзывов (19)'],spb_avail:true},
+  {id:6,brand:'Continental',model:'VikingContact 7 103T',origin:'Германия',price:10949,price_set:43796,user_rating:4.0,reviews:2,tag:'#1 За Рулём',scores:{ice:8.8,snow:8.8,wet:7.5,dry:8.8,noise:7.5,wear:8.3},avail:'good',eu_label:{roll:'C',wet:'E',noise:'72'},pros:['#1 в тесте За Рулём','Шина с проверенной репутацией (2018/19)'],cons:['EU wet E — слабо на мокром','EU noise 72 дБ'],spb_avail:true},
+  {id:7,brand:'Kumho',model:'WS71 104T XL',origin:'Южная Корея',price:11819,price_set:47276,user_rating:4.9,reviews:385,tag:'',scores:{ice:7.8,snow:7.9,wet:8.0,dry:7.8,noise:7.9,wear:8.0},avail:'good',eu_label:{roll:'—',wet:'—',noise:'—'},pros:['Усиленный XL 104 — запас по нагрузке для Tiguan','Хорошие отзывы (4.9/385)'],cons:['Нет EU-метки','Слабее на льду и снегу vs конкуренты'],spb_avail:true},
+  {id:8,brand:'Pirelli',model:'Winter Ice Zero Friction 103T XL',origin:'Россия (Киров)',price:13951,price_set:55804,user_rating:5.0,reviews:7,tag:'Хит',scores:{ice:9.0,snow:8.8,wet:7.2,dry:8.4,noise:8.8,wear:8.0},avail:'good',eu_label:{roll:'C',wet:'D',noise:'69'},pros:['Лучшее сцепление на льду','Тихая (69 дБ)','Хит — широкое наличие'],cons:['EU wet D — слабее на мокром асфальте'],spb_avail:true},
+  {id:9,brand:'Hankook',model:'Winter i*cept IZ3 X W636A 103T',origin:'Корея',price:14401,price_set:57604,user_rating:5.0,reviews:2,tag:'',scores:{ice:9.1,snow:9.0,wet:8.5,dry:8.5,noise:8.5,wear:8.3},avail:'limited',eu_label:{roll:'—',wet:'—',noise:'—'},pros:['Рейтинг 5.0','Новое поколение IZ3 X'],cons:['Всего 2 отзыва — нет достоверных данных','Нет EU-метки','100% предоплата'],spb_avail:true},
+  {id:10,brand:'Ikon',model:'Autograph Snow 3 SUV 103R XL',origin:'Россия (Всеволожск)',price:14762,price_set:59048,user_rating:4.9,reviews:179,tag:'Новинка',scores:{ice:8.8,snow:9.0,wet:6.5,dry:7.8,noise:7.8,wear:8.0},avail:'good',eu_label:{roll:'B',wet:'E',noise:'72'},pros:['Сильна на льду и снегу','EU rolling B — экономичная'],cons:['EU wet E — худший показатель на мокром из всех'],spb_avail:true},
+  {id:11,brand:'Ikon',model:'Autograph Snow 5 SUV 103R XL',origin:'Россия (Всеволожск)',price:16313,price_set:65252,user_rating:4.9,reviews:24,tag:'Новинка',scores:{ice:9.0,snow:9.1,wet:7.5,dry:8.0,noise:8.2,wear:8.2},avail:'limited',eu_label:{roll:'B',wet:'D',noise:'71'},pros:['EU rolling B','Сильна на льду и снегу','Рейтинг 4.9'],cons:['EU wet D','Мало отзывов (24) — новинка'],spb_avail:true},
+  {id:12,brand:'Bridgestone',model:'Blizzak LM005 103H',origin:'Япония',price:21427,price_set:85708,user_rating:4.9,reviews:93,tag:'',scores:{ice:8.7,snow:8.7,wet:9.1,dry:8.9,noise:8.3,wear:8.0},avail:'limited',eu_label:{roll:'C',wet:'A',noise:'71'},pros:['EU wet A — отлично на мокром','Надёжная классика, проверенная временем'],cons:['Высокая цена','100% предоплата'],spb_avail:true},
+  {id:13,brand:'Yokohama',model:'Bluearth*Winter V906 ⚠️LI99',origin:'Россия / Япония',price:21940,price_set:87760,user_rating:4.8,reviews:100,tag:'⚠️ LI99',scores:{ice:8.0,snow:8.2,wet:8.5,dry:9.0,noise:8.2,wear:8.5},avail:'good',eu_label:{roll:'D',wet:'B',noise:'71'},pros:['EU wet B — хорошо на мокром','Высокая управляемость на сухом'],cons:['⚠️ Индекс нагрузки 99 (775 кг) — НИЖЕ требуемого 103 для Tiguan','Дорогая'],spb_avail:true},
+  {id:14,brand:'Michelin',model:'Alpin 7 103H XL',origin:'Россия',price:26390,price_set:105560,user_rating:4.6,reviews:5,tag:'Новинка',scores:{ice:8.2,snow:8.4,wet:8.8,dry:9.2,noise:8.2,wear:8.8},avail:'limited',eu_label:{roll:'B',wet:'B',noise:'71'},pros:['EU B/B — лучший EU-рейтинг в подборке','Ожидаемо долгий ресурс'],cons:['Самая высокая цена (26 390 ₽)','Всего 5 отзывов — новинка'],spb_avail:true},
 ];
 const WEIGHTS={ice:0.22,snow:0.22,wet:0.20,dry:0.14,noise:0.12,wear:0.10};
-const BRAND_COLORS={'Michelin':'#1d4ed8','Pirelli':'#be123c','Cordiant':'#15803d','Ikon':'#0f766e','Kumho':'#d97706'};
+const BRAND_COLORS={'Cordiant':'#15803d','Gislaved':'#0284c7','Nokian':'#0f766e','Pirelli':'#be123c','Ikon':'#7c3aed','Yokohama':'#dc2626','Michelin':'#1d4ed8','Continental':'#059669','Bridgestone':'#9333ea','Hankook':'#0891b2','Kumho':'#d97706'};
 function calcScore(t){return +Object.entries(WEIGHTS).reduce((s,[k,w])=>s+t.scores[k]*w,0).toFixed(2);}
 TYRES.forEach(t=>{t.score=calcScore(t);});
 let activeBrands=new Set(TYRES.map(t=>t.brand));
-let maxPrice=12000;
+let maxPrice=27000;
 let sortBy='score';
 let expandedRow=null;
 function filtered(){return TYRES.filter(t=>activeBrands.has(t.brand)&&t.price<=maxPrice);}
@@ -388,7 +398,7 @@ function bar(v){return`<div class="score-bar-wrap"><div class="score-bar"><div c
 function renderTable(){
   const arr=sorted(filtered());
   document.getElementById('count-badge').textContent=arr.length+' моделей';
-  const cols=[{k:'brand',l:'Производитель / Модель'},{k:'score',l:'Рейтинг',s:'score'},{k:'ice',l:'Лёд',s:'ice'},{k:'snow',l:'Снег',s:'snow'},{k:'wet',l:'Мокрый',s:'wet'},{k:'noise',l:'Тихость',s:'noise'},{k:'price',l:'Цена',s:'price_asc'},{k:'avail',l:'Наличие'},{k:'spb',l:'СПб'},{k:'det',l:''}];
+  const cols=[{k:'brand',l:'Производитель / Модель'},{k:'score',l:'Рейтинг',s:'score'},{k:'ice',l:'Лёд',s:'ice'},{k:'snow',l:'Снег',s:'snow'},{k:'wet',l:'Мокрый',s:'wet'},{k:'noise',l:'Тихость',s:'noise'},{k:'price',l:'Цена',s:'price_asc'},{k:'user',l:'Отзывы'},{k:'avail',l:'Наличие'},{k:'det',l:''}];
   document.getElementById('tbl-head').innerHTML=cols.map(c=>`<th class="${c.s&&sortBy===c.s?'sorted':''}" data-sort="${c.s||''}">${c.l}${c.s?`<span class="sort-ico">${sortBy===c.s?'▲':'↕'}</span>`:''}</th>`).join('');
   document.querySelectorAll('thead th[data-sort]').forEach(th=>{if(th.dataset.sort)th.addEventListener('click',()=>{sortBy=th.dataset.sort;renderAll();});});
   const tbody=document.getElementById('tbl-body');
@@ -396,12 +406,14 @@ function renderTable(){
   arr.forEach(t=>{
     const tr=document.createElement('tr');tr.dataset.id=t.id;
     const av=t.avail==='good'?'<span class="avail-dot avail-good"></span>Широко':t.avail==='limited'?'<span class="avail-dot avail-limited"></span>Ограничено':'<span class="avail-dot avail-poor"></span>Мало';
+    const tagHtml=t.tag?`<span class="suitability-tag ${t.tag.includes('⚠️')?'suit-no':t.tag==='Хит'?'suit-yes':'badge'}" style="${t.tag==='Новинка'?'background:var(--accent-bg);color:var(--accent)':''}">${t.tag}</span> `:'';
+    const warn=t.id===7?'<div style="font-size:10px;color:var(--red);margin-top:2px">⚠️ LI 99 — ниже нормы</div>':'';
     tr.innerHTML=`
-      <td><div class="brand-cell"><div class="brand-dot" style="background:${BRAND_COLORS[t.brand]}"></div><div><div>${t.brand}</div><div class="model-name">${t.model}</div></div></div></td>
+      <td><div class="brand-cell"><div class="brand-dot" style="background:${BRAND_COLORS[t.brand]}"></div><div><div>${tagHtml}${t.brand}</div><div class="model-name">${t.model}</div>${warn}</div></div></td>
       <td>${bar(t.score)}</td><td>${bar(t.scores.ice)}</td><td>${bar(t.scores.snow)}</td><td>${bar(t.scores.wet)}</td><td>${bar(t.scores.noise)}</td>
       <td class="price-cell">${fmt(t.price)} ₽<div class="price-sub">${fmt(t.price_set)} ₽ / 4 шт.</div></td>
+      <td style="font-size:12px;color:var(--text-2)">★${t.user_rating} <span style="color:var(--text-3)">(${t.reviews})</span></td>
       <td style="font-size:12px;color:var(--text-2)">${av}</td>
-      <td><span class="suitability-tag ${t.spb_avail?'suit-yes':'suit-no'}">${t.spb_avail?'Есть':'Уточнить'}</span></td>
       <td><button class="expand-btn" data-id="${t.id}">▶</button></td>`;
     tbody.appendChild(tr);
     tr.querySelector('.expand-btn').addEventListener('click',()=>{
@@ -413,7 +425,8 @@ function renderTable(){
         <div class="detail-section"><h4>Плюсы</h4><ul class="pros">${t.pros.map(p=>`<li>${p}</li>`).join('')}</ul></div>
         <div class="detail-section"><h4>Минусы</h4><ul class="cons">${t.cons.map(c=>`<li>${c}</li>`).join('')}</ul></div>
         <div class="detail-section"><h4>EU Label</h4><div style="font-size:12px;color:var(--text-2)">Топливо: <b>${t.eu_label.roll}</b> · Мокрое: <b>${t.eu_label.wet}</b> · Шум: <b>${t.eu_label.noise} дБ</b></div></div>
-        <div class="detail-section"><h4>Страна</h4><div style="font-size:12px;color:var(--text-2)">${t.origin}</div></div>
+        <div class="detail-section"><h4>Производство</h4><div style="font-size:12px;color:var(--text-2)">${t.origin}</div></div>
+        <div class="detail-section"><h4>Источник цен</h4><div style="font-size:12px;color:var(--text-3)">mosautoshina.ru, октябрь 2026. Баллы по льду/снегу — оценочные по EU-меткам, не тест.</div></div>
       </div></td>`;
       tr.after(dr);
     });
